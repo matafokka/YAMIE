@@ -1,11 +1,18 @@
 # YAMIE
 Yet Another Modular Image Editor -- project for article.
 
-This application is a modular image viewer and editor written with Python 3 and Qt and used to write an article for university. It consist from core and modules. Each module is custom Qt widget placed on the top of window. It takes QLabel (widget that shows image) as parameter.
+This application is a modular image viewer and editor written with Python 3 and Qt and used to write an article for university. It consist from core and modules. Each module is custom QWidget placed on the top of window. It takes QLabel (widget that shows image) as parameter.
+
+Structure of program:
+YAMIE.py -- core
+ui/mainwindow.ui -- UI file for core (main window)
+img/ -- directory for images
+plugins/ -- directory for modules
+plugins/plugins.cfg -- file for enabling/disabling modules. Only modules listed in this file will load.
 
 To add new modules put them in "plugins" folder and list them in plugins.cfg in a new line. To disable module just add a character "#" in the beginning. Maybe in future I'll write a GUI window to arrange and enable/disable modules.
 
-You can easily write your own module using this sample:
+You can easily write your own module using this sample. As listed above, module is a custom QWidget class:
 ```python
 # Import your stuff
 from PyQt5.QtWidgets import QPushButton
