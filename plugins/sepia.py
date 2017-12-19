@@ -13,9 +13,8 @@ class main(QPushButton):
         # Make our module super awesome
         super().__init__()
         # Set width of this widget (self)
-        self.setMinimumWidth(70)
-        # Set text on button
-        self.setText('Grayscale')
+        self.setMinimumWidth(60)
+        self.setText('Sepia')
         
         # Make a connection to click event
         self.clicked.connect(lambda: self.action(parent))
@@ -29,7 +28,7 @@ class main(QPushButton):
         except:
             return None
         
-        # Now make it all gray
+        # Now make sepia
         for i in range(image.width()):
             for j in range(image.height()):
                 # Create a temporary variables
@@ -37,10 +36,19 @@ class main(QPushButton):
                 color = image.pixelColor(i, j).getRgb()
                 # Alpha
                 alpha = color[3]
-                # Gray color will be arithmetic mean of all colors in pixel
-                gray = int((color[0] + color[1] + color[2]) / 3)
+                # sepia will be arithmetic mean of red and green
+                # and applied to these color respectively
+                # It's like a grayscale but for two colors
+                sepia = int((color[0] + color[1]) / 2)
+                # This is for blue color. If it's less than other colors
+                # pixel will be with yellow shade.
+                # If it's more then set it equal to sepia.
+                # After that there will be only yellow and gray pixels.
+                blue = int((color[0] + color[1] + color[2]) / 3)
+                if blue > sepia:
+                    blue = sepia
                 # Apply new color to current pixel
-                image.setPixel(i, j, QColor(gray, gray, gray, alpha).rgba())
+                image.setPixel(i, j, QColor(sepia, sepia, blue, alpha).rgba())
         
         # Show the new image
         parent.Image.setPixmap(QPixmap.fromImage(image))
