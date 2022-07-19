@@ -1,3 +1,7 @@
+# Deprecated
+
+I'm ashamed of this project. Still keeping it visible for future laughs.
+
 # YAMIE
 Yet Another Modular Image Editor – project for an article.
 
